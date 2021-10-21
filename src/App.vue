@@ -1,23 +1,23 @@
 <template>
-  <Students/>
+  <div id="app">
+    <Nav></Nav>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-
-import Students from "./components/students/Students.vue";
+import Nav from "./components/nav/Nav.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Students
-  }
-}
-
+    Nav,
+  },
+};
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
-
 </style>
