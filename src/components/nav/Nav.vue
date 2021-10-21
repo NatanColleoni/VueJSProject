@@ -22,7 +22,7 @@
               >
             </li>
             <li class="nav-item">
-              <router-link to="/students" class="nav-link" href="#"
+              <router-link to="/allstudents" class="nav-link" href="#"
                 >Students</router-link
               >
             </li>

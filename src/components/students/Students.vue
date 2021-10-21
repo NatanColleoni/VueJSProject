@@ -1,8 +1,11 @@
 <template>
   <div class="container">
-    <Title text="Students" />
+    <Title
+      :btnBack="false"
+      :text="teacherid != undefined ? 'Teacher: ' + teacher.name : 'Students'"
+    />
 
-    <div class="d-flex mb-3">
+    <div v-if="teacherid != undefined" class="d-flex mb-3">
       <input
         class="form-control form-control-sm"
         type="text"
@@ -26,7 +29,13 @@
       <tbody v-if="students.length">
         <tr v-for="(student, index) in students" :key="index">
           <td>{{ student.id }}</td>
-          <td>{{ student.name }}</td>
+          <router-link
+            :to="`/studentdetails/${student.id}`"
+            tag="td"
+            style="cursor: pointer"
+          >
+            {{ student.name }}</router-link
+          >
           <td>
             <button class="btn btn-danger" @click="removeStudent(student)">
               Remove
@@ -50,21 +59,35 @@ export default {
   },
   data() {
     return {
+      teacherid: this.$route.params.prof_id,
+      teacher: {},
       name: "",
       students: [],
     };
   },
   created() {
-    this.$http
-      .get("http://localhost:3000/students")
-      .then((res) => res.json())
-      .then((students) => (this.students = students));
+    if (this.teacherid) {
+      this.loadTeachers();
+      this.$http
+        .get("http://localhost:3000/students?teacher.id=" + this.teacherid)
+        .then((res) => res.json())
+        .then((students) => (this.students = students));
+    } else {
+      this.$http
+        .get("http://localhost:3000/students/")
+        .then((res) => res.json())
+        .then((students) => (this.students = students));
+    }
   },
   props: {},
   methods: {
     addStudent() {
       let objStudent = {
         name: this.name,
+        teacher: {
+          id: this.teacher.id,
+          name: this.teacher.name,
+        },
       };
 
       this.$http
@@ -81,6 +104,14 @@ export default {
         .then(() => {
           let index = this.students.indexOf(student);
           this.students.splice(index, 1);
+        });
+    },
+    loadTeachers() {
+      this.$http
+        .get("http://localhost:3000/teachers/" + this.teacherid)
+        .then((res) => res.json())
+        .then((teacher) => {
+          this.teacher = teacher;
         });
     },
   },

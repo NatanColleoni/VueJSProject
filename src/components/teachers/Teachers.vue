@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Title text="Teachers" />
+    <Title text="Teachers" :btnBack="false" />
 
     <div class="d-flex mb-3">
       <input
@@ -27,7 +27,11 @@
         <tr v-for="(teacher, index) in teachers" :key="index">
           <td>{{ teacher.id }}</td>
 
-          <router-link to="/students" tag="td" style="cursor: pointer">
+          <router-link
+            v-bind:to="`/students/${teacher.id}`"
+            tag="td"
+            style="cursor: pointer"
+          >
             {{ teacher.name }}
           </router-link>
 
@@ -51,6 +55,7 @@ export default {
     return {
       teachers: [],
       students: [],
+      name: "",
     };
   },
   created() {
@@ -81,6 +86,19 @@ export default {
         .then((res) => res.json())
         .then((teacher) => {
           (this.teachers = teacher), this.getNumberOfStudentsbyTeacher();
+        });
+    },
+    addTeacher() {
+      let objTeacher = {
+        name: this.name,
+      };
+
+      this.$http
+        .post("http://localhost:3000/teachers", objTeacher)
+        .then((res) => res.json())
+        .then((teacher) => {
+          this.teachers.push(teacher);
+          this.name = "";
         });
     },
   },

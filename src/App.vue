@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Nav></Nav>
-    <router-view></router-view>
+    <router-view v-bind:key="$route.fullPath"></router-view>
   </div>
 </template>
 
