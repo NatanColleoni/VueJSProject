@@ -20,15 +20,18 @@
         <th scope="col">Options</th>
       </thead>
 
-      <tbody>
+      <tbody v-if="students.length">
         <tr v-for="(student, index) in students" :key="index">
-          <td>{{ index+1 }}</td>
+          <td>{{ student.id }}</td>
           <td>{{ student.name }}</td>
           <td>
             <button class="btn btn-danger" @click="removeStudent(student)">Remove</button>
           </td>
         </tr>
       </tbody>
+      <tfoot v-else>
+        <p>There is no student registered.</p>
+      </tfoot>
     </table>
   </div>
 </template>
@@ -56,17 +59,29 @@ export default {
   },
   methods: {
     addStudent() {
+
       let objStudent = {
         name: this.name
       }
 
-      this.students.push(objStudent)
-      this.name = ''
+      this.$http
+      .post('http://localhost:3000/students', objStudent)
+      .then(res => res.json())
+      .then(student => {
+        this.students.push(student)
+        this.name = ''
+      })
+
     },
     removeStudent(student) {
-      let index = this.students.indexOf(student)
 
-      this.students.splice(index, 1)
+      this.$http
+      .delete(`http://localhost:3000/students/${student.id}`)
+      .then(() => {
+        let index = this.students.indexOf(student)
+        this.students.splice(index, 1)
+      })
+
     }
   }
 }
