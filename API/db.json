@@ -1,0 +1,63 @@
+{
+  "teachers": [
+    {
+      "id": 1,
+      "name": "teacher1"
+    },
+    {
+      "id": 2,
+      "name": "teacher2"
+    },
+    {
+      "id": 3,
+      "name": "teacher3"
+    },
+    {
+      "name": "teacher4",
+      "id": 4
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "name": "Natan1",
+      "birthdate": "20/10/2002",
+      "teacher": {
+        "id": 2,
+        "name": "teacher2"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Natan2",
+      "teacher": {
+        "id": 3,
+        "name": "teacher3"
+      }
+    },
+    {
+      "id": 4,
+      "name": "natan5",
+      "teacher": {
+        "name": "teacher4",
+        "id": 4
+      }
+    },
+    {
+      "name": "josicreide",
+      "teacher": {
+        "id": 1,
+        "name": "teacher1"
+      },
+      "id": 5
+    },
+    {
+      "id": 6,
+      "name": "Student-teacher4",
+      "teacher": {
+        "id": 1,
+        "name": "teacher1"
+      }
+    }
+  ]
+}
