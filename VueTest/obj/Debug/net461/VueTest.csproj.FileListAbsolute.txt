@@ -1,7 +1,0 @@
-C:\Users\natan\source\repos\VueTest\VueTest\obj\Debug\net461\VueTest.csprojAssemblyReference.cache
-C:\Users\natan\source\repos\VueTest\VueTest\obj\Debug\net461\VueTest.exe.config
-C:\Users\natan\source\repos\VueTest\VueTest\obj\Debug\net461\VueTest.AssemblyInfoInputs.cache
-C:\Users\natan\source\repos\VueTest\VueTest\obj\Debug\net461\VueTest.AssemblyInfo.cs
-C:\Users\natan\source\repos\VueTest\VueTest\obj\Debug\net461\VueTest.csproj.CoreCompileInputs.cache
-C:\Users\natan\source\repos\VueTest\VueTest\obj\Debug\net461\VueTest.RazorAssemblyInfo.cache
-C:\Users\natan\source\repos\VueTest\VueTest\obj\Debug\net461\VueTest.RazorAssemblyInfo.cs
