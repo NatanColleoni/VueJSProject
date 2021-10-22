@@ -69,12 +69,12 @@ export default {
     if (this.teacherid) {
       this.loadTeachers();
       this.$http
-        .get("http://localhost:3000/students?teacher.id=" + this.teacherid)
+        .get("http://localhost:30785/api/students?teacher.id=" + this.teacherid)
         .then((res) => res.json())
         .then((students) => (this.students = students));
     } else {
       this.$http
-        .get("http://localhost:3000/students/")
+        .get("http://localhost:30785/api/students/")
         .then((res) => res.json())
         .then((students) => (this.students = students));
     }
@@ -91,7 +91,7 @@ export default {
       };
 
       this.$http
-        .post("http://localhost:3000/students", objStudent)
+        .post("http://localhost:30785/students", objStudent)
         .then((res) => res.json())
         .then((student) => {
           this.students.push(student);
@@ -100,7 +100,7 @@ export default {
     },
     removeStudent(student) {
       this.$http
-        .delete(`http://localhost:3000/students/${student.id}`)
+        .delete(`http://localhost:30785/students/${student.id}`)
         .then(() => {
           let index = this.students.indexOf(student);
           this.students.splice(index, 1);
@@ -108,7 +108,7 @@ export default {
     },
     loadTeachers() {
       this.$http
-        .get("http://localhost:3000/teachers/" + this.teacherid)
+        .get("http://localhost:30785/teachers/" + this.teacherid)
         .then((res) => res.json())
         .then((teacher) => {
           this.teacher = teacher;

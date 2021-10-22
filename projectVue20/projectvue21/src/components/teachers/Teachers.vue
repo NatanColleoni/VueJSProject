@@ -60,7 +60,7 @@ export default {
   },
   created() {
     this.$http
-      .get("http://localhost:3000/students")
+      .get("http://localhost:30785/students")
       .then((res) => res.json())
       .then((students) => {
         (this.students = students), this.loadTeachers();
@@ -82,7 +82,7 @@ export default {
     },
     loadTeachers() {
       this.$http
-        .get("http://localhost:3000/teachers")
+        .get("http://localhost:30785/teachers")
         .then((res) => res.json())
         .then((teacher) => {
           (this.teachers = teacher), this.getNumberOfStudentsbyTeacher();
@@ -94,7 +94,7 @@ export default {
       };
 
       this.$http
-        .post("http://localhost:3000/teachers", objTeacher)
+        .post("http://localhost:30785/teachers", objTeacher)
         .then((res) => res.json())
         .then((teacher) => {
           this.teachers.push(teacher);

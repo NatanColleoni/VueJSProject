@@ -61,12 +61,12 @@ export default {
   },
   created() {
     this.$http
-      .get("http://localhost:3000/students/" + this.id)
+      .get("http://localhost:30785/api/student/" + this.id)
       .then((res) => res.json())
       .then((student) => (this.student = student));
 
     this.$http
-      .get("http://localhost:3000/teachers")
+      .get("http://localhost:30785/api/teacher")
       .then((res) => res.json())
       .then((teacher) => (this.teachers = teacher));
   },
@@ -80,7 +80,7 @@ export default {
       };
 
       this.$http.put(
-        `http://localhost:3000/students/${studentUpdate.id}`,
+        `http://localhost:30785/api/student/${studentUpdate.id}`,
         studentUpdate
       );
     },
