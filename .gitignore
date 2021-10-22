@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /dist
+.vs
 
 # local env files
 .env.local
@@ -18,7 +19,6 @@ pnpm-debug.log*
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
 *.sw?
 
 # csharp exclusion
