@@ -12,7 +12,7 @@ namespace projectVue.Controllers
     [ApiController]
     public class TeachersController : Controller
     {
-        public IRepository _repo { get;  }
+        public IRepository _repo { get; }
         public TeachersController(IRepository repo)
         {
             _repo = repo;
@@ -55,7 +55,7 @@ namespace projectVue.Controllers
             {
                 _repo.Add(model);
 
-                if(await _repo.SaveChangesAsync(model))
+                if (await _repo.SaveChangesAsync(model))
                 {
                     return Created($"/api/teacher/{model.Id}", model);
                 }
@@ -78,7 +78,7 @@ namespace projectVue.Controllers
 
                 _repo.Update(model);
 
-                if(await _repo.SaveChangesAsync(model))
+                if (await _repo.SaveChangesAsync(model))
                 {
                     teacher = await _repo.GetTeacherAsyncById(TeacherId, true);
 
@@ -101,9 +101,16 @@ namespace projectVue.Controllers
                 var teacher = await _repo.GetTeacherAsyncById(TeacherId, false);
                 if (teacher == null) return NotFound();
 
-                _repo.Delete(teacher);
 
-                return Ok();
+                _repo.Delete(teacher);
+                if (await _repo.SaveChangesAsync(teacher))
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de dados falhou");
+                }
             }
             catch (System.Exception)
             {

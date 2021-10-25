@@ -19,7 +19,7 @@ namespace projectVue.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult>  Get()
+        public async Task<IActionResult> Get()
         {
             try
             {
@@ -70,7 +70,7 @@ namespace projectVue.Controllers
             {
                 _repo.Add(model);
 
-                if(await _repo.SaveChangesAsync(model))
+                if (await _repo.SaveChangesAsync(model))
                 {
                     return Created($"/api/student/{model.Id}", model);
                 }
@@ -85,7 +85,7 @@ namespace projectVue.Controllers
         }
 
         [HttpPut("{StudentId}")]
-        public async Task<IActionResult> Put(int StudentId,Student model)
+        public async Task<IActionResult> Put(int StudentId, Student model)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace projectVue.Controllers
 
                 _repo.Update(model);
 
-                if(await _repo.SaveChangesAsync(model))
+                if (await _repo.SaveChangesAsync(model))
                 {
                     student = await _repo.GetStudentAsyncById(StudentId, true);
 
@@ -119,7 +119,15 @@ namespace projectVue.Controllers
 
                 _repo.Delete(student);
 
-                return Ok();
+                if (await _repo.SaveChangesAsync(student))
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de dados falhou");
+                }
+
             }
             catch (System.Exception)
             {
