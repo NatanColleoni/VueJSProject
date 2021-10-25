@@ -69,12 +69,12 @@ export default {
     if (this.teacherid) {
       this.loadTeachers();
       this.$http
-        .get("http://localhost:30785/api/students?teacher.id=" + this.teacherid)
+        .get(`http://localhost:5000/api/students/ByTeacher/${this.teacherid}`)
         .then((res) => res.json())
         .then((students) => (this.students = students));
     } else {
       this.$http
-        .get("http://localhost:30785/api/students/")
+        .get("http://localhost:5000/api/students/")
         .then((res) => res.json())
         .then((students) => (this.students = students));
     }
@@ -84,14 +84,12 @@ export default {
     addStudent() {
       let objStudent = {
         name: this.name,
-        teacher: {
-          id: this.teacher.id,
-          name: this.teacher.name,
-        },
+        birthdate: "",
+        teacherid: this.teacher.id,
       };
 
       this.$http
-        .post("http://localhost:30785/students", objStudent)
+        .post("http://localhost:5000/api/students", objStudent)
         .then((res) => res.json())
         .then((student) => {
           this.students.push(student);
@@ -100,7 +98,7 @@ export default {
     },
     removeStudent(student) {
       this.$http
-        .delete(`http://localhost:30785/students/${student.id}`)
+        .delete(`http://localhost:5000/api/students/${student.id}`)
         .then(() => {
           let index = this.students.indexOf(student);
           this.students.splice(index, 1);
@@ -108,7 +106,7 @@ export default {
     },
     loadTeachers() {
       this.$http
-        .get("http://localhost:30785/teachers/" + this.teacherid)
+        .get("http://localhost:5000/api/teachers/" + this.teacherid)
         .then((res) => res.json())
         .then((teacher) => {
           this.teacher = teacher;

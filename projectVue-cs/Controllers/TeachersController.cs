@@ -98,7 +98,7 @@ namespace projectVue.Controllers
         {
             try
             {
-                var teacher = _repo.GetTeacherAsyncById(TeacherId, false);
+                var teacher = await _repo.GetTeacherAsyncById(TeacherId, false);
                 if (teacher == null) return NotFound();
 
                 _repo.Delete(teacher);

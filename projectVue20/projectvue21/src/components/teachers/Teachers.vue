@@ -20,7 +20,7 @@
       <thead class="table-primary">
         <th scope="col">Id</th>
         <th scope="col">Name</th>
-        <th scope="col">Options</th>
+        <th scope="col">Students</th>
       </thead>
 
       <tbody v-if="teachers.length">
@@ -60,7 +60,7 @@ export default {
   },
   created() {
     this.$http
-      .get("http://localhost:30785/students")
+      .get("http://localhost:5000/api/students")
       .then((res) => res.json())
       .then((students) => {
         (this.students = students), this.loadTeachers();
@@ -82,7 +82,7 @@ export default {
     },
     loadTeachers() {
       this.$http
-        .get("http://localhost:30785/teachers")
+        .get("http://localhost:5000/api/teachers")
         .then((res) => res.json())
         .then((teacher) => {
           (this.teachers = teacher), this.getNumberOfStudentsbyTeacher();
@@ -94,7 +94,7 @@ export default {
       };
 
       this.$http
-        .post("http://localhost:30785/teachers", objTeacher)
+        .post("http://localhost:5000/api/teachers", objTeacher)
         .then((res) => res.json())
         .then((teacher) => {
           this.teachers.push(teacher);
